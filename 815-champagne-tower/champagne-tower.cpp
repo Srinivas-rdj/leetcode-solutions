@@ -17,8 +17,6 @@ public:
         if(prev[r1-1]>=1)  v[r1]=(prev[r1-1]-1)/2.0;
             prev=v;
             r1++;
-            for(int i=0;i<r1;i++) cout<<v[i]<<" ";
-            cout<<"\n";
         }
         if(prev[c]>=1) return 1.0;
         return prev[c];
