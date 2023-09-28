@@ -36,6 +36,7 @@ public:
        while(!pq.empty()){
            int d=pq.top()[0],x=pq.top()[1],y=pq.top()[2];
            pq.pop();
+           if(dist[x][y]<d) continue;
            for(int i=0;i<4;i++){
                int x1=x+a[i],y1=y+b[i];
                if(ispos(x1,y1,n)){
