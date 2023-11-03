@@ -1,7 +1,7 @@
 class Solution {
 public:
 unordered_map<int,int> mp;
-map<int,int> mp1;
+unordered_map<int,int> mp1;
 int mod=1e9+7;
     int cnttrees(int n){
         if(mp1[n]!=0) return mp1[n];
