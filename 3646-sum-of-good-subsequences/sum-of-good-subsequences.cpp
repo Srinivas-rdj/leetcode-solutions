@@ -1,28 +1,32 @@
-#define ll long long int
+#define ll long long
+int m=1e9+7;
 class Solution {
 public:
     int sumOfGoodSubsequences(vector<int>& nums) {
-        // no of subsequences 
-        // sum of subsequences 
-        // sum for 1 
-        // sum for 2 
-        ll mod = 1e9+7;
-        ll n = nums.size();
-        vector<ll> ways(n,0);
-        vector<ll> sum(n,0);
-        map<ll,ll> nways;
-        map<ll,ll> nsum;
-        for(ll i = 0;i<n;i++){
-            ways[i] = ((nways[nums[i]-1]+nways[nums[i]+1])%mod+1)%mod;
-            sum[i] = (nsum[nums[i]-1]+nsum[nums[i]+1])%mod;
-            sum[i] = (sum[i]+nums[i])%mod;
-            sum[i] = sum[i] +(((nways[nums[i]-1]+nways[nums[i]+1])%mod)*nums[i])%mod;
-            nways[nums[i]]=(nways[nums[i]]+ways[i])%mod;
-            nsum[nums[i]]=(nsum[nums[i]]+sum[i])%mod;
-            // cout<< ways[i] << " "<< sum[i]<< " " << nways[nums[i]] << " " << nsum[nums[i]]<<endl; 
+        int n=nums.size();
+        unordered_map<int,int> mp,mp1,mp2;
+        vector<pair<int,int>> dp(n,{0,0});
+        ll ans=0;
+        for(int i=n-1;i>=0;i--){
+            ll x=0,cnt=1;
+            if(mp[nums[i]+1]!=0){
+                x=(x+dp[mp[nums[i]+1]].first)%m;
+                cnt=(cnt+dp[mp[nums[i]+1]].second)%m;
+            }
+             if(mp[nums[i]-1]!=0){
+                x=(x+dp[mp[nums[i]-1]].first)%m;
+                cnt=(cnt+dp[mp[nums[i]-1]].second)%m;
+            }
+            x=((cnt*nums[i])%m+x)%m;
+            ans=(ans+x)%m;
+             if(mp[nums[i]]!=0){
+                x=(x+dp[mp[nums[i]]].first)%m;
+                cnt=(cnt+dp[mp[nums[i]]].second)%m;
+            }
+            dp[i].first=x;
+            dp[i].second=cnt;
+            mp[nums[i]]=i;
         }
-        ll ans = 0;
-        for(auto j : nsum) ans =(ans + j.second)%mod;
         return ans;
     }
 };
