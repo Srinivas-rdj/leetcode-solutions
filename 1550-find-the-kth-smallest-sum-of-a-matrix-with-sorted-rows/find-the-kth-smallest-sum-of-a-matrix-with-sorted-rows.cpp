@@ -8,12 +8,11 @@ public:
         s.insert({sum,v});
         int i=1;
         while(i<k){
-            int sum=(*s.begin()).first;
+            int sum2=(*s.begin()).first;
             v=(*s.begin()).second;
-            s.erase({sum,v});
-            int sum2=sum;
+            s.erase({sum2,v});
             for(int j=0;j<n;j++){
-                sum=sum2;
+               int sum=sum2;
                if(v[j]+1<m){ 
                 sum+=mat[j][v[j]+1]-mat[j][v[j]];
                v[j]++;
