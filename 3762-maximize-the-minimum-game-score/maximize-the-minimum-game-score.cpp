@@ -1,29 +1,30 @@
 class Solution {
 public:
     bool ispos(vector<int>& v,long long mid,long long m){
-        vector<long long> g(v.size(),0);
+        long long g=0;
         m--;
-        g[0]=v[0];
+        g=v[0];
         for(int i=0;i<v.size()-1;i++){
-            if(g[i]<mid){
-                long long x=(mid-g[i])/v[i];
-                if((mid-g[i])%v[i]) x++;
+            if(g<mid){
+                long long x=(mid-g)/v[i];
+                if((mid-g)%v[i]) x++;
                 if(m<2*x) return 0;
                 m-=2*x;
-                g[i+1] = v[i+1]*x;
+                g = v[i+1]*x;
             }
+            else g=0;
             if(m==0){
-                if(g[v.size()-1]!=0) break;
+                if(i==v.size()-2&&g!=0) break;
                 return 0;
             }
-            g[i+1]+=v[i+1];
+            g+=v[i+1];
             m--;
             // cout<<m<<"\n";
         }
         int i=v.size()-1;
-        if(g[i]<mid){
-            long long x=(mid-g[i])/v[i];
-                if((mid-g[i])%v[i]) x++;
+        if(g<mid){
+            long long x=(mid-g)/v[i];
+                if((mid-g)%v[i]) x++;
                 if(m<2*x) return 0;
                 m-=2*x; 
         }
