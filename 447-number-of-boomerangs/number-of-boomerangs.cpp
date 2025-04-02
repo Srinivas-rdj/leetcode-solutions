@@ -6,7 +6,7 @@ public:
     int numberOfBoomerangs(vector<vector<int>>& p) {
         int ans=0,n=p.size();
         for(int i=0;i<n;i++){
-        map<long long,int> mp;
+        unordered_map<long long,int> mp;
             for(int j=0;j<n;j++){
                 if(j==i) continue;
                 int d=dist(p[i],p[j]);
